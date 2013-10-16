@@ -44,7 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" 
                 android:entries="@array/image_sizes_array"  
-                android:prompt="@string/empty""/>
+                android:prompt="@string/empty"/>
         </TableRow>
 
         <TableRow
@@ -64,7 +64,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" 
                 android:entries="@array/color_filter_array"  
-                android:prompt="@string/empty""/>
+                android:prompt="@string/empty"/>
         </TableRow>
 
         <TableRow

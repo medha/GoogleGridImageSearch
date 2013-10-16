@@ -39,6 +39,9 @@ public class ImageSearchActivity extends Activity {
 	private String imgcolor;
 	private String imgtype;
 	private String as_sitesearch;
+	private int imgcolorPos;
+	private int imgszPos;
+	private int imgtypePos;
 	private static String BASE_ADDRESS = "https://ajax.googleapis.com/ajax/services/search/images?";
 
 	@Override
@@ -84,10 +87,20 @@ public class ImageSearchActivity extends Activity {
 			toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 300);
 			toast.show();
 			
-			String fullUrl = BASE_ADDRESS + "rsz=8" + "&start=0" + "&v=1.0"
+			String fullUrl;
+			if (imgsz != null && imgcolor!= null && imgtype!= null  && as_sitesearch!= null) {
+			
+			 fullUrl = BASE_ADDRESS + "rsz=8" + "&start=0" + "&v=1.0"
 					+ "&imgsz=" + imgsz + "&imgcolor=" + imgcolor + "&imgtype="
 					+ imgtype + "&as_sitesearch=" + as_sitesearch + "&q="
 					+ Uri.encode(searchQuery);
+			} else if ( imgsz != null && imgcolor!= null && imgtype!= null && as_sitesearch== null) {
+				 fullUrl = BASE_ADDRESS + "rsz=8" + "&start=0" + "&v=1.0"
+						+ "&imgsz=" + imgsz + "&imgcolor=" + imgcolor + "&imgtype="
+						+ imgtype + "&q=" + Uri.encode(searchQuery);
+			} else {
+				 fullUrl = BASE_ADDRESS + "rsz=8" + "&start=0" + "&v=1.0" + "&q=" + Uri.encode(searchQuery);
+			}
 
 			AsyncHttpClient client = new AsyncHttpClient();
 			loadImages(client, fullUrl);
@@ -106,6 +119,10 @@ public class ImageSearchActivity extends Activity {
 		i.putExtra("imgcolor", imgcolor);
 		i.putExtra("imgtype", imgtype);
 		i.putExtra("as_sitesearch", as_sitesearch);
+		
+		 i.putExtra("imgszPos", imgszPos);
+		  i.putExtra("imgcolorPos",imgcolorPos);
+		  i.putExtra("imgtypePos", imgtypePos);
 		this.startActivityForResult(i, REQUEST_CODE);
 	}
 
@@ -116,6 +133,10 @@ public class ImageSearchActivity extends Activity {
 			imgcolor = data.getExtras().getString("imgcolor");
 			imgtype = data.getExtras().getString("imgtype");
 			as_sitesearch = data.getExtras().getString("as_sitesearch");
+			
+			imgszPos = data.getExtras().getInt("imgszPos");
+			imgcolorPos =  data.getExtras().getInt("imgcolorPos");
+			imgtypePos =  data.getExtras().getInt("imgtypePos");
 
 			String fullUrl = BASE_ADDRESS + "rsz=8" + "&start=0" + "&v=1.0"
 					+ "&imgsz=" + imgsz + "&imgcolor=" + imgcolor + "&imgtype="
