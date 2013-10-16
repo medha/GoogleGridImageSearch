@@ -1,0 +1,13 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+ 
+
+      <item
+        android:id="@+id/image_search_settings"
+        android:icon="@android:drawable/ic_menu_manage"
+        android:showAsAction="ifRoom"
+        android:title="@string/settings"
+        android:onClick="onSettingsAction">
+    </item>
+    
+</menu>
