@@ -43,6 +43,7 @@ public class ImageSearchActivity extends Activity {
 	private int imgszPos;
 	private int imgtypePos;
 	private static String BASE_ADDRESS = "https://ajax.googleapis.com/ajax/services/search/images?";
+	int start = 0; 
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +65,29 @@ public class ImageSearchActivity extends Activity {
 			}
 
 		});
+		
+	}
+	
+	public void loadMore(View v) {
+		start = start+8;
+		String fullUrl;
+		if (imgsz != null && imgcolor!= null && imgtype!= null  && as_sitesearch!= null) {
+		
+		 fullUrl = BASE_ADDRESS + "rsz=8" + "&start=" +start + "&v=1.0"
+				+ "&imgsz=" + imgsz + "&imgcolor=" + imgcolor + "&imgtype="
+				+ imgtype + "&as_sitesearch=" + as_sitesearch + "&q="
+				+ Uri.encode(searchQuery);
+		} else if ( imgsz != null && imgcolor!= null && imgtype!= null && as_sitesearch== null) {
+			 fullUrl = BASE_ADDRESS + "rsz=8" + "&start=" + start + "&v=1.0"
+					+ "&imgsz=" + imgsz + "&imgcolor=" + imgcolor + "&imgtype="
+					+ imgtype + "&q=" + Uri.encode(searchQuery);
+		} else {
+			 fullUrl = BASE_ADDRESS + "rsz=8" + "&start=" + start + "&v=1.0" + "&q=" + Uri.encode(searchQuery);
+		}
+
+		AsyncHttpClient client = new AsyncHttpClient();
+		loadImages(client, fullUrl);
+		
 	}
 
 	@Override
