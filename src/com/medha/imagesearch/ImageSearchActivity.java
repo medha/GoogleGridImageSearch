@@ -66,10 +66,19 @@ public class ImageSearchActivity extends Activity {
 
 		});
 		
+		gvImages.setOnScrollListener(new EndlessScrollListener() {
+			
+			@Override
+			public void onLoadMore(int page, int totalItemsCount) {
+				
+				loadMore(totalItemsCount);
+				
+			}
+		});
 	}
 	
-	public void loadMore(View v) {
-		start = start+8;
+	public void loadMore(int totalItemsCount) {
+		start = totalItemsCount-8;
 		String fullUrl;
 		if (imgsz != null && imgcolor!= null && imgtype!= null  && as_sitesearch!= null) {
 		
