@@ -95,7 +95,11 @@ public class ImageSearchActivity extends Activity {
 		}
 
 		AsyncHttpClient client = new AsyncHttpClient();
-		loadImages(client, fullUrl);
+//		if (start == 0) {
+//		loadImages(client, fullUrl, true);
+//		} else {
+			loadImages(client, fullUrl, false);
+//		}
 		
 	}
 
@@ -136,7 +140,7 @@ public class ImageSearchActivity extends Activity {
 			}
 
 			AsyncHttpClient client = new AsyncHttpClient();
-			loadImages(client, fullUrl);
+			loadImages(client, fullUrl, true);
 		} else {
 			Toast toast = Toast.makeText(this, "Please enter a search query!", Toast.LENGTH_SHORT);
 			toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 300);
@@ -177,11 +181,11 @@ public class ImageSearchActivity extends Activity {
 					+ Uri.encode(searchQuery);
 
 			AsyncHttpClient client = new AsyncHttpClient();
-			loadImages(client, fullUrl);
+			loadImages(client, fullUrl, true);
 		}
 	}
 
-	private void loadImages(AsyncHttpClient client, String fullUrl) {
+	private void loadImages(AsyncHttpClient client, String fullUrl, final boolean clear) {
 		client.get(fullUrl, new JsonHttpResponseHandler() {
 			@Override
 			public void onSuccess(JSONObject response) {
@@ -189,7 +193,9 @@ public class ImageSearchActivity extends Activity {
 				try {
 					imageJsonResults = response.getJSONObject("responseData")
 							.getJSONArray("results");
-					imageResults.clear();
+					if (clear) {
+						imageResults.clear();
+					}
 					imageAdapter.addAll(ImageResult
 							.fromJSONArray(imageJsonResults));
 				} catch (JSONException e) {
