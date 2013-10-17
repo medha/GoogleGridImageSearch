@@ -78,7 +78,7 @@ public class ImageSearchActivity extends Activity {
 	}
 	
 	public void loadMore(int totalItemsCount) {
-		start = totalItemsCount-8;
+		start = totalItemsCount;
 		String fullUrl;
 		if (imgsz != null && imgcolor!= null && imgtype!= null  && as_sitesearch!= null) {
 		
@@ -95,12 +95,7 @@ public class ImageSearchActivity extends Activity {
 		}
 
 		AsyncHttpClient client = new AsyncHttpClient();
-//		if (start == 0) {
-//		loadImages(client, fullUrl, true);
-//		} else {
 			loadImages(client, fullUrl, false);
-//		}
-		
 	}
 
 	@Override
