@@ -31,6 +31,7 @@ public final class R {
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
         public static final int pressed_background_imagesearchexample=0x7f020001;
+        public static final int screenshot=0x7f020002;
     }
     public static final class id {
         public static final int bSave=0x7f0a0013;
